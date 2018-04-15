@@ -15,7 +15,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      images: [],
+      gallery: {
+        images: [],
+        loading: false
+      },
       search: {
         phrase: null,
         attempted: false //for hiding no results initially
@@ -44,10 +47,20 @@ class App extends Component {
     });
 
     if (phrase != null) {
-      this.setState({ images: [] });
+      this.setState({
+        gallery: {
+          images: [],
+          loading: true
+        }
+      });
 
       Server.getGettyImages(phrase, data =>
-        this.setState({ images: data.images })
+        this.setState({
+          gallery: {
+            images: data.images,
+            loading: false
+          }
+        })
       );
     }
   }
@@ -71,11 +84,28 @@ class App extends Component {
   }
 
   render() {
-    const images = this.state.images.map((image, index) => {
-      return (
-        <Thumb key={index} image={image} clickHandler={this.handleThumb} />
+    let images = null;
+    if (!this.state.gallery.loading) {
+      if (this.state.gallery.images.length) {
+        images = this.state.gallery.images.map((image, index) => {
+          return (
+            <Thumb key={index} image={image} clickHandler={this.handleThumb} />
+          );
+        });
+      } else {
+        images = (
+          <p>
+            <b>No results for search term, please try another word.</b>
+          </p>
+        );
+      }
+    } else {
+      images = (
+        <p>
+          <b>Loading...</b>
+        </p>
       );
-    });
+    }
 
     return (
       <div>

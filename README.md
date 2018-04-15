@@ -1,6 +1,6 @@
 # React Getty Image Search App
 
-You can find a working [demo](https://pn-getty-image-search.herokuapp.com/) solution hosted on Heroku.<br>
+You can find a working [demo](https://pn-getty-image-search.herokuapp.com/) hosted on Heroku.<br>
 
 I'm using [Getty Images API](http://developers.gettyimages.com/docs/)
 

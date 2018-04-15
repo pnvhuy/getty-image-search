@@ -33,7 +33,7 @@ class Search extends React.Component {
 					</p>
 				);
 			} else {
-				textResult = <p>Could not find any matches</p>;
+				textResult = <p><b>Could not find a correct spelling for that word, please try again.</b></p>;
 			}
 		}
 
