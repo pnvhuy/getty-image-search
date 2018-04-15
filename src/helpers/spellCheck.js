@@ -21,6 +21,9 @@ export default function spellCheck(_word) {
   let consonants = [];
   let locations = []; //parallel consonant for includes()
 
+  let wordLength = searchWord.length;
+  let flag = false;
+
   //find and note position of all consonants in word
   for (let i = 0; i < searchWord.length; i++) {
     if (searchWord.charAt(i).match(/[bcdfghjklmnpqrstvwxyz]/)) {
@@ -30,15 +33,12 @@ export default function spellCheck(_word) {
     }
   }
 
-  let wordLength = searchWord.length;
-  let flag = false;
-
   //iterate through array of words with specified length
   for (let i = 0; i < dictionary[wordLength - 1].length; i++) {
     let dictionaryWord = dictionary[wordLength - 1][i];
 
     //firstFound exact match so exit
-    if (searchWord === dictionaryWord) {
+    if (searchWord === dictionaryWord.toLowerCase()) {
       word = searchWord;
       break;
     }
