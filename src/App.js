@@ -108,7 +108,7 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <div className="container">
         <h1>Getty Image Search</h1>
 
         <Search search={this.state.search} clickHandler={this.handleSearch} />

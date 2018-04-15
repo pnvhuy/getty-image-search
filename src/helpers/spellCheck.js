@@ -1,3 +1,9 @@
+/*
+Spell Check Rules
+- Remove non-letter characters. 'nyl;on' should auto-correct to ‘nylon'
+- Mistyped vowels. 'ceku' should auto-correct to ‘cake'
+*/
+
 import Server from "../services/Server";
 
 let dictionary = [];

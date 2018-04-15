@@ -1,10 +1,12 @@
 # React Getty Image Search
 
-You can find a working [demo](https://pn-getty-image-search.herokuapp.com/) hosted on Heroku.<br>
-
-I'm using [Getty Images API](http://developers.gettyimages.com/docs/).
+This application searches for images using [Getty Images APIs](http://developers.gettyimages.com/docs/) and does a simple spell check before requesting the data.
 
 Dictionary text file was taken from [gwicks](http://www.gwicks.net/dictionaries.htm) (English).
+
+You can find a working [demo](https://pn-getty-image-search.herokuapp.com/) hosted on Heroku.<br>
+
+Make sure to replace your Getty Images api-key in `config/credentials.json`.
 
 ## Available Scripts
 
