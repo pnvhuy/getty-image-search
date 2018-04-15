@@ -54,7 +54,7 @@ getDictionary();
 function getDictionary(callback) {
   $.ajax({
     type: "GET",
-    url: "http://localhost:3000/backup.txt",
+    url: "https://raw.githubusercontent.com/pnvhuy/getty-image-search/master/public/backup.txt",
     success: function(data) {
       let lines = data.split("\n");
       let words = [];
@@ -66,6 +66,7 @@ function getDictionary(callback) {
       }
 
       dictionary = words;
+
     },
     fail: function(data, err) {
       console.log(data);
