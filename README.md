@@ -1,10 +1,10 @@
-# React Getty Image Search App
+# React Getty Image Search
 
 You can find a working [demo](https://pn-getty-image-search.herokuapp.com/) hosted on Heroku.<br>
 
-I'm using [Getty Images API](http://developers.gettyimages.com/docs/)
+I'm using [Getty Images API](http://developers.gettyimages.com/docs/).
 
-Dictionary text file was taken from [gwicks](http://www.gwicks.net/dictionaries.htm) (English)
+Dictionary text file was taken from [gwicks](http://www.gwicks.net/dictionaries.htm) (English).
 
 ## Available Scripts
 
@@ -12,7 +12,7 @@ In the project directory:
 
 ### `npm install`
 
-To install node module packages.
+Installs node module packages.
 
 ### `npm start`
 
