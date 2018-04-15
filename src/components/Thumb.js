@@ -7,10 +7,10 @@ class Thumb extends React.Component {
 
 	render() {
 		return (
-            <div class="img-holder" onClick={() => this.handleClick()}>
-              <img src={this.props.sizes[2].uri} />
-            </div>
-        );
+			<div className="img-holder" onClick={() => this.handleClick()}>
+				<img src={this.props.sizes[2].uri} />
+			</div>
+		);
 	}
 }
 

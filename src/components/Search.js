@@ -23,9 +23,11 @@ class Search extends React.Component {
 				<input
 					type="text"
 					placeholder="Search"
-					onChange={(e) => this.handleChange(e)}
+					onChange={e => this.handleChange(e)}
 				/>
-				<button class="button" onClick={() => this.handleClick()}>Go!</button>
+				<button className="button" onClick={() => this.handleClick()}>
+					Go!
+				</button>
 			</div>
 		);
 	}
