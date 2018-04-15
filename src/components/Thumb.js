@@ -2,15 +2,26 @@ import React from "react";
 
 class Thumb extends React.Component {
 	handleClick() {
-		this.props.clickHandler(this.props.sizes[1].uri);
+		this.props.clickHandler(this.props.image);
 	}
 
 	render() {
-		return (
-			<div className="img-holder" onClick={() => this.handleClick()}>
-				<img src={this.props.sizes[2].uri} />
-			</div>
-		);
+		if (
+			this.props.image.display_sizes &&
+			this.props.image.display_sizes.length &&
+			this.props.image.display_sizes[0].uri
+		) {
+			return (
+				<div className="img-holder" onClick={() => this.handleClick()}>
+					<img
+						src={this.props.image.display_sizes[2].uri}
+						alt={this.props.image.title}
+					/>
+				</div>
+			);
+		} else {
+			return null;
+		}
 	}
 }
 

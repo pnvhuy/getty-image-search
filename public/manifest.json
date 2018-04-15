@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Getty React App",
+  "name": "Getty Image Search React App",
   "icons": [
     {
       "src": "favicon.ico",

@@ -15,9 +15,14 @@ class App extends Component {
     super(props);
     this.state = {
       data: {},
-      phrase: null,
-      attempted: false,
-      modal: false
+      search: {
+        phrase: null,
+        attempted: false
+      },
+      modal: {
+        show: false,
+        image: null
+      }
     };
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -25,18 +30,13 @@ class App extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
 
-  handleModal() {
-    this.setState({
-      modal: false
-    });
-    console.log("handled");
-  }
-
   handleSearch(_phrase) {
     let phrase = spellCheck(_phrase);
     this.setState({
-      phrase: phrase,
-      attempted: true
+      search: {
+        phrase: phrase,
+        attempted: true
+      }
     });
 
     if (phrase != null) {
@@ -44,67 +44,46 @@ class App extends Component {
     }
   }
 
-  handleThumb(src) {
-    // console.log(src);
+  handleThumb(image) {
     this.setState({
-      modal: true,
-      modalURL: src
+      modal: {
+        show: true,
+        image: image
+      }
+    });
+  }
+
+  handleModal() {
+    this.setState({
+      modal: {
+        show: false,
+        image: null
+      }
     });
   }
 
   render() {
-    const images =
+    const arrImg =
       this.state.data && this.state.data.images ? this.state.data.images : [];
-    const html = images.map((image, index) => {
-      if (
-        image.display_sizes &&
-        image.display_sizes.length &&
-        image.display_sizes[0].uri
-      ) {
-        return (
-          <Thumb
-            key={index}
-            sizes={image.display_sizes}
-            clickHandler={this.handleThumb}
-          />
-        );
-      }
+    const images = arrImg.map((image, index) => {
+      return (
+        <Thumb key={index} image={image} clickHandler={this.handleThumb} />
+      );
     });
-
-    let resultText = "";
-
-    if (this.state.attempted) {
-      if (this.state.phrase) {
-        resultText = (
-          <p>
-            Search results for <u>{this.state.phrase}</u>
-          </p>
-        );
-      } else {
-        resultText = <p>Could not find any matches</p>;
-      }
-    }
 
     return (
       <div>
-        <div className="row">
-          <h1>Getty Image Search</h1>
-        </div>
+        <h1>Getty Image Search</h1>
 
-        <div className="row">
-          <Search clickHandler={this.handleSearch} />
-          {resultText}
-        </div>
+        <Search search={this.state.search} clickHandler={this.handleSearch} />
 
-        <div className="images">{this.state.phrase ? html : ""}</div>
+        <div className="images">{this.state.search.phrase ? images : null}</div>
 
-        <div
-          className="modal"
-          onClick={() => this.handleModal()}
-          style={this.state.modal ? { display: "block" } : { display: "none" }}
-        >
-          <img src={this.state.modalURL} />
-        </div>
+        <Modal
+          clickHandler={this.handleModal}
+          show={this.state.modal.show}
+          image={this.state.modal.image}
+        />
       </div>
     );
   }

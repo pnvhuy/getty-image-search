@@ -10,10 +10,11 @@ var Server = {
         },
         params: {
           phrase: phrase,
-          fields: "display_set"
+          fields: "display_set, title"
         }
       })
       .then(response => {
+        console.log(response.data);
         callback(response.data);
       })
       .catch(response => {
@@ -24,7 +25,7 @@ var Server = {
   getDictionary: function(callback) {
     axios
       .get(
-        "https://raw.githubusercontent.com/pnvhuy/getty-image-search/master/public/backup.txt",
+        "https://raw.githubusercontent.com/pnvhuy/getty-image-search/master/public/dictionary.txt",
         {
           params: {
             fields: "display_set"
