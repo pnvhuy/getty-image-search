@@ -1,0 +1,43 @@
+
+
+.img-holder {
+	position: relative;
+	float: left;
+	width: 180px;
+	height: 180px;
+	padding: 10px;
+	margin: 5px;
+	background-color: #666;
+}
+
+.img-holder img {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-height: 180px;
+	max-width: 180px;
+}
+
+.images {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+}
+
+.modal img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #666;
+}
