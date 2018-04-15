@@ -6,7 +6,7 @@ Dictionary text file was taken from [gwicks](http://www.gwicks.net/dictionaries.
 
 You can find a working [demo](https://pn-getty-image-search.herokuapp.com/) hosted on Heroku.<br>
 
-Make sure to replace your Getty Images api-key in `config/credentials.json`.
+Make sure to replace your Getty Images api-key in `src/config/credentials.json`.
 
 ## Available Scripts
 
