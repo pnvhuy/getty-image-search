@@ -2,6 +2,7 @@ import axios from "axios";
 import credentials from "../config/credentials";
 
 var Server = {
+  //Getty Images API
   getGettyImages: function(phrase, callback) {
     axios
       .get("https://api.gettyimages.com/v3/search/images", {
@@ -14,7 +15,6 @@ var Server = {
         }
       })
       .then(response => {
-        console.log(response.data);
         callback(response.data);
       })
       .catch(response => {
@@ -22,20 +22,17 @@ var Server = {
       });
   },
 
+  //Dictionary text file hosted on GitHub
   getDictionary: function(callback) {
     axios
       .get(
-        "https://raw.githubusercontent.com/pnvhuy/getty-image-search/master/public/dictionary.txt",
-        {
-          params: {
-            fields: "display_set"
-          }
-        }
+        "https://raw.githubusercontent.com/pnvhuy/getty-image-search/master/public/dictionary.txt"
       )
       .then(response => {
         let lines = response.data.split("\n");
         let words = [];
 
+        //creating a multidimensional array where words are grouped by length of the word
         for (let i = 0; i < lines.length; i++) {
           if (!words[lines[i].length - 1]) words[lines[i].length - 1] = [];
 

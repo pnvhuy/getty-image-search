@@ -7,41 +7,39 @@ Server.getDictionary(data => {
 });
 
 export default function spellCheck(_word) {
-  let word = _word.toLowerCase().replace(/[^a-z]/g, "");
-  let sendBack = word;
-  let found = false;
+  //strip everything but alphabet characters
+  let searchWord = _word.toLowerCase().replace(/[^a-z]/g, "");
+  let word = searchWord;
+  let firstFound = false;
 
   let consonants = [];
-  let locations = [];
+  let locations = []; //parallel consonant for includes()
 
-  for (let i = 0; i < word.length; i++) {
-    if (word.charAt(i).match(/[bcdfghjklmnpqrstvwxyz]/)) {
-      consonants.push({
-        letter: word.charAt(i),
-        location: i
-      });
+  //find and note position of all consonants in word
+  for (let i = 0; i < searchWord.length; i++) {
+    if (searchWord.charAt(i).match(/[bcdfghjklmnpqrstvwxyz]/)) {
+      consonants.push(searchWord.charAt(i));
 
       locations.push(i);
     }
   }
 
-  let length = word.length;
+  let wordLength = searchWord.length;
   let flag = false;
 
-  for (let i = 0; i < dictionary[length - 1].length; i++) {
-    let temp = dictionary[length - 1][i];
+  //iterate through array of words with specified length
+  for (let i = 0; i < dictionary[wordLength - 1].length; i++) {
+    let dictionaryWord = dictionary[wordLength - 1][i];
 
-    if (word === temp) {
-      sendBack = word;
-      console.log("exact match!");
+    //firstFound exact match so exit
+    if (searchWord === dictionaryWord) {
+      word = searchWord;
       break;
     }
 
+    //check if consonants are correct and in right position
     for (let j = 0; j < consonants.length; j++) {
-      if (
-        consonants[j].letter !==
-        temp.charAt(consonants[j].location).toLowerCase()
-      ) {
+      if (consonants[j] !== dictionaryWord.charAt(locations[j]).toLowerCase()) {
         flag = false;
         break;
       }
@@ -49,11 +47,12 @@ export default function spellCheck(_word) {
       flag = true;
     }
 
+    //check if all other letters are vowels
     if (flag) {
-      for (let j = 0; j < temp.length; j++) {
+      for (let j = 0; j < dictionaryWord.length; j++) {
         if (
           !locations.includes(j) &&
-          !temp
+          !dictionaryWord
             .charAt(j)
             .toLowerCase()
             .match(/[aeiou]/)
@@ -66,22 +65,23 @@ export default function spellCheck(_word) {
       }
     }
 
+    //first eligible word
     if (flag) {
-      if (!found) {
-        found = temp;
+      if (!firstFound) {
+        firstFound = dictionaryWord;
       }
     }
 
-    if (i === dictionary[length - 1].length - 1) {
-      if (found) {
-        sendBack = found;
-        console.log("first found close: " + found);
+    //no exact match so send first eligible word
+    if (i === dictionary[wordLength - 1].length - 1) {
+      if (firstFound) {
+        word = firstFound;
       } else {
-        sendBack = null;
-        console.log("no matches");
+        //return null if no spell correction available
+        word = null;
       }
     }
   }
 
-  return sendBack;
+  return word;
 }

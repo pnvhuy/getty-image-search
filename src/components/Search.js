@@ -5,14 +5,18 @@ class Search extends React.Component {
 		super(props);
 
 		this.state = {
-			input: "hello"
+			input: ""
 		};
 	}
 
+	//update input on chage
 	handleChange(e) {
-		this.setState({ input: e.target.value });
+		this.setState({
+			input: e.target.value
+		});
 	}
 
+	//search button pressed
 	handleClick() {
 		this.props.clickHandler(this.state.input);
 	}
@@ -20,6 +24,7 @@ class Search extends React.Component {
 	render() {
 		let textResult = null;
 
+		//calc search result text
 		if (this.props.search.attempted) {
 			if (this.props.search.phrase) {
 				textResult = (
@@ -39,6 +44,7 @@ class Search extends React.Component {
 					placeholder="Search"
 					onChange={e => this.handleChange(e)}
 				/>
+
 				<button className="button" onClick={() => this.handleClick()}>
 					Go!
 				</button>

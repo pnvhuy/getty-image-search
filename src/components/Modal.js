@@ -6,6 +6,7 @@ class Modal extends React.Component {
 	}
 
 	render() {
+		//check that image exists
 		if (
 			this.props.image && 
 			this.props.image.display_sizes &&

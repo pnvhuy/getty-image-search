@@ -13,11 +13,12 @@ import spellCheck from "./helpers/spellCheck";
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      data: {},
+      images: [],
       search: {
         phrase: null,
-        attempted: false
+        attempted: false //for hiding no results initially
       },
       modal: {
         show: false,
@@ -25,13 +26,16 @@ class App extends Component {
       }
     };
 
+    //binds so have access to this in functions
     this.handleSearch = this.handleSearch.bind(this);
     this.handleThumb = this.handleThumb.bind(this);
     this.handleModal = this.handleModal.bind(this);
   }
 
   handleSearch(_phrase) {
+    //spell checker
     let phrase = spellCheck(_phrase);
+
     this.setState({
       search: {
         phrase: phrase,
@@ -40,7 +44,11 @@ class App extends Component {
     });
 
     if (phrase != null) {
-      Server.getGettyImages(phrase, data => this.setState({ data: data }));
+      this.setState({ images: [] });
+
+      Server.getGettyImages(phrase, data =>
+        this.setState({ images: data.images })
+      );
     }
   }
 
@@ -63,9 +71,7 @@ class App extends Component {
   }
 
   render() {
-    const arrImg =
-      this.state.data && this.state.data.images ? this.state.data.images : [];
-    const images = arrImg.map((image, index) => {
+    const images = this.state.images.map((image, index) => {
       return (
         <Thumb key={index} image={image} clickHandler={this.handleThumb} />
       );
